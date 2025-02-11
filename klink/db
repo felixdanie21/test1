@@ -1,0 +1,29 @@
+CREATE TABLE nota (
+    nota_id VARCHAR(20) PRIMARY KEY,
+    tanggal DATE,
+    pasien_nama VARCHAR(100),
+    pasien_alamat TEXT,
+    pasien_kelamin CHAR(1),
+    pasien_umur INT,
+    penanggung VARCHAR(100),
+    dokter_nama VARCHAR(100),
+    total_biaya DECIMAL(10,2)
+);
+
+CREATE TABLE detail_nota (
+    detail_id INT AUTO_INCREMENT PRIMARY KEY,
+    nota_id VARCHAR(20),
+    keterangan VARCHAR(100),
+    harga_satuan DECIMAL(10,2),
+    qty INT,
+    subtotal DECIMAL(10,2),
+    FOREIGN KEY (nota_id) REFERENCES nota(nota_id) ON DELETE CASCADE
+);
+INSERT INTO nota (nota_id, tanggal, pasien_nama, pasien_alamat, pasien_kelamin, pasien_umur, total_biaya)
+VALUES ('200311-B1', '2003-11-06', 'BRONTO', 'JL. KAMBOJA NO. 5', 'L', 14, 19750);
+
+INSERT INTO detail_nota (nota_id, keterangan, harga_satuan, qty, subtotal)
+VALUES
+    ('200311-B1', 'PEMERIKSAAN', 10000, 1, 10000),
+    ('200311-B1', 'AMOXICILIN 500MG', 400, 15, 6000),
+    ('200311-B1', 'PARACETAMOL 500MG', 250, 15, 3750);
